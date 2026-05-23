@@ -2,11 +2,11 @@
   "title": "火山视窗平台",
   "name": "JadeView_VolModule",
   "version": "2.1.1",
-  "author": "Jade Team",
+  "author": "luoxueyousheng",
   "platform": ["Windows"],
   "chipArch": ["x86", "x64"],
   "compatibleVersion": "2.0 ~ 2.1",
-  "sdkFilePath": "./sdk",
+  "sdkFilePath": "./SDK",
   "changelog": [
     {
       "version": "2.1.1",

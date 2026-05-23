@@ -6,7 +6,7 @@
   "platform": ["Windows"],
   "chipArch": ["x86"],
   "compatibleVersion": "2.0 ~ 2.1",
-  "sdkFilePath": "./SDK",
+  "sdkFilePath": "./e_Sdk",
   "changelog": [
     {
       "version": "2.1.1",

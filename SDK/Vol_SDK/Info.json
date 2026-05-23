@@ -1,11 +1,11 @@
 {
-  "name": "JadeView",
+  "name": "JadeView_VolModule",
   "version": "2.1.1",
   "author": "Jade Team",
   "platform": ["Windows"],
   "chipArch": ["x86", "x64"],
-  "compatibleVersion": "2.1.1",
-  "sdkFilePath": "./SDK/JadeView_VolModule_2.1.1.26E26.vcip",
+  "compatibleVersion": "2.0 ~ 2.1",
+  "sdkFilePath": "./sdk",
   "changelog": [
     {
       "version": "2.1.1",

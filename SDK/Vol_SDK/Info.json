@@ -2,7 +2,7 @@
   "title": "火山视窗平台模块",
   "name": "JadeView_VolModule",
   "version": "2.1.1",
-  "author": "luoxueyousheng",
+  "author": "落雪有声",
   "platform": ["Windows"],
   "chipArch": ["x86", "x64"],
   "compatibleVersion": "2.0 ~ 2.1",

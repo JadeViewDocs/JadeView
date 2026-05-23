@@ -1,0 +1,16 @@
+{
+  "name": "JadeView",
+  "version": "2.1.1",
+  "author": "Jade Team",
+  "platform": ["Windows"],
+  "chipArch": ["x86", "x64"],
+  "compatibleVersion": "2.1.1",
+  "sdkFilePath": "./SDK/JadeView_VolModule_2.1.1.26E26.vcip",
+  "changelog": [
+    {
+      "version": "2.1.1",
+      "updateTime": "2026-05-23",
+      "content": "修复了 创建窗口 函数 JadeView_视图选项 参数节点下 预加载脚本 参数传递错误的问题\n完善了部分函数注释"
+    }
+  ]
+}

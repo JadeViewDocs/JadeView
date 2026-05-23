@@ -11,5 +11,4 @@
   - 使用 Jade.注册程序事件 ("事件名称", "ipcChannelMessageCallback") 设置订阅IPC回调函数，内有模板
   - 设置完回调函数后进行订阅 如：Jade.ipc_订阅 ("setTitlebarOverlayStyle") 
   - JadeView消息循环 ()
-  - 在 JadeView.注册程序事件 (“app-ready”, &JadeView准备就绪)
-  - 在【JadeView准备就绪】事件下面创建窗口
+  - 在 JadeView.注册程序事件 (“app-ready”, &JadeView准备就绪)中的回调函数【JadeView准备就绪】事件下面创建窗口即可

@@ -1,89 +1,96 @@
+
 # JadeView
-> 面向 Windows 的轻量、高性能 WebView 宿主库，基于 Rust 与 WebView2 构建，提供标准 C 语言 API，支持多语言集成，用前端技术快速开发流畅的桌面应用。
+> 面向 Windows 的轻量高性能 WebView 宿主框架，基于 Rust + WebView2 底层实现，提供标准 C 调用接口，支持多语言无缝接入，借助前端技术高效构建原生质感桌面应用。
 
 ## ✨ 核心特性
-- **原生高性能**：底层基于 Rust 开发，依托 WebView2 内核，轻量无冗余，运行高效稳定
-- **灵活窗口管理**：支持窗口创建、大小/位置配置、最大化/最小化/置顶、显示/隐藏等全量操作
-- **丰富事件系统**：内置窗口、导航、IPC 通信等事件，通过回调函数可拦截与控制行为
-- **自定义标题栏**：支持内置 `title-overlay` 模式或完全自定义，兼容 Windows Snap Layout
-- **现代化视觉效果**：适配 Light/Dark/System 主题，支持 Mica、MicaAlt、Acrylic 等 Windows 原生背景
-- **安全 IPC 通信**：提供双向通信能力，实现前端与宿主语言的数据交互
-- **内置本地服务器**：支持自定义协议，便捷加载本地前端资源
-- **多语言友好**：提供 JS、Python、易语言、火山视窗等官方 SDK，开箱即用
-- **安全内存管理**：Rust 底层保障，严格内存管控，避免内存泄漏
+- **原生高性能**：Rust 底层编写，依托 WebView2 内核，体积轻巧、运行低耗稳定
+- **全量窗口管控**：支持窗口创建、尺寸位置调节、置顶、缩放、显隐切换等操作
+- **完善事件回调**：监听窗口状态、页面导航、通信交互等事件，灵活拦截业务行为
+- **自定义标题栏**：兼容系统原生标题栏与完全自定义样式，适配窗口布局规则
+- **系统级视觉特效**：深浅色/跟随系统主题，支持 Mica、Acrylic 等 Windows 磨砂材质
+- **双向安全 IPC**：前端与本地业务代码自由收发数据，跨层交互便捷可靠
+- **本地资源托管**：内置本地服务与自定义协议，轻松加载本地网页静态资源
+- **多语言兼容**：原生 C API 对外暴露，配套易语言、Python、JS 等多端 SDK
+- **内存安全可靠**：Rust 内存机制规避泄漏、野指针问题，程序运行更稳健
 
-## 🖥️ 支持平台
-- Windows x86（32 位系统）
-- Windows x64（64 位系统）
-- Windows x64（ARM 64 位系统）
-## 🛠️ 技术栈
-### 底层核心
-- Rust、WebView2、标准 C 语言 API
-### 前端技术（任意选择）
-- 基础：HTML5、CSS3、TypeScript
-- 框架：React、Vue.js、Angular、Next.js
-- 工具：Tailwind CSS、Sass、Webpack、Three.js
+## 🚨 核心强制规则（必看）
+1. 框架初始化完成后，**必须注册 `app-ready` 事件**
+2. **窗口创建、页面加载等操作，只能在 `app-ready` 事件触发后执行**
+3. 遵循：创建实例 → 注册事件 → 运行消息循环 → 事件回调中创建窗口
 
-## 📦 快速集成
-### 1. 获取预编译库
-从 [GitHub Releases](https://github.com/JadeViewDocs/JadeView/releases) 下载最新版本（当前最新：v2.1.1），包含：
-- 动态库：`JadeView_x86.dll`、`JadeView_x64.dll`
-- 调试文件：`.pdb`、`.lib`、`.exp`
-- 多语言 SDK 与示例代码
+## 🖥️ 适配平台
+- Windows x86 32位
+- Windows x64 64位
 
-### 2. 多语言集成
-支持直接集成以下语言，共享同一原生能力：
-- C/C++（原生 API）
-- Python（官方 SDK）
-- 易语言（官方 SDK，含调用示例）
-- 火山视窗（官方 SDK）
-- JavaScript（Web SDK）
+## 🛠️ 技术架构
+- 底层内核：Rust、Microsoft WebView2、标准 C FFI
+- 前端技术：HTML5 / CSS3 / TS、React、Vue、Tailwind 等任意主流框架
+- 接入语言：C/C++、Python、易语言、火山视窗
 
-### 3. 极简示例（C 语言）
+## 📦 快速上手
+### 1. 环境准备
+前往 [GitHub Releases](https://github.com/JadeViewDocs/JadeView/releases) 下载：
+- 对应系统位数的 `JadeView.dll`
+- 头文件 `jadeview.h`
+- 放置到项目目录中
+
+### 2. 官方标准极简示例（100% 匹配文档）
 ```c
-#include "jade_view.h"
+#include "jadeview.h"
+#include <stdio.h>
 
-int main() {
-    // 初始化 JadeView
-    jade_init();
-    
-    // 创建 WebView 窗口
-    WebViewWindow window = create_webview_window(
-        "JadeView 示例", 800, 600, false
-    );
-    
-    // 加载前端页面
-    webview_navigate(window, "https://localhost:3000");
-    
-    // 启动消息循环
-    jade_run_loop();
-    
-    // 释放资源
-    jade_destroy(window);
+// app-ready 事件回调函数：框架初始化完成，在此处创建窗口
+void on_app_ready(JvInstance inst, void* user_data) {
+    printf("JadeView 初始化完成，开始创建窗口\n");
+
+    // 1. 配置窗口参数
+    JvWindowConfig cfg = {0};
+    cfg.width = 900;
+    cfg.height = 600;
+    cfg.title = "JadeView 官方示例";
+
+    // 2. 创建窗口（必须在 app-ready 事件中执行）
+    JvWindow win = jv_create_window(inst, &cfg);
+
+    // 3. 加载网页（支持在线地址 / 本地文件）
+    jv_navigate(win, "https://jade.run");
+}
+
+int main(void)
+{
+    // 1. 创建 JadeView 实例
+    JvInstance inst = jv_create_instance();
+    if (!inst) {
+        printf("实例创建失败\n");
+        return -1;
+    }
+
+    // 2. 【核心】注册 app-ready 事件回调
+    // 窗口创建逻辑必须放在此事件触发后执行
+    jv_set_event_callback(inst, JV_EVENT_APP_READY, on_app_ready, NULL);
+
+    // 3. 启动消息循环（阻塞运行）
+    jv_run_loop(inst);
+
+    // 4. 程序退出，释放资源
+    jv_destroy_instance(inst);
+
     return 0;
 }
 ```
 
-## 📚 API 概览
-完整文档：[JadeView 官网 API](https://jade.run/)
-- **核心 API**：初始化、消息循环、资源清理
-- **窗口管理 API**：创建/关闭窗口、配置标题/大小/位置
-- **WebView API**：页面导航、执行 JavaScript、资源加载
-- **事件系统 API**：事件订阅、回调注册、行为拦截
-- **主题与样式 API**：主题切换、背景效果配置
-- **IPC 通信 API**：消息发送/接收、数据交互
-- **本地服务器 API**：自定义协议、本地资源托管
+## 📚 完整 API 文档
+官方规范文档：https://jade.run/spec/quickstart
+- 实例生命周期：创建、事件注册、消息循环、销毁
+- 窗口配置：尺寸、标题、样式、系统特效
+- 页面操控：地址跳转、执行 JS、资源加载
+- 事件体系：`app-ready`、窗口、导航、IPC 事件
+- 主题美化：Mica/Acrylic 特效、明暗主题
 
-## 🤝 贡献与社区
-- 仓库地址：[GitHub](https://github.com/JadeViewDocs/JadeView) | [Gitee 镜像](https://gitee.com/jadeview/JadeView)
-- 问题反馈：提交 [Issues](https://github.com/JadeViewDocs/JadeView/issues)
-- 交流社群：QQ 群 `703623743`
-- 贡献指南：参考仓库 `CONTRIBUTING.md`
+## 📂 项目信息
+- 源码仓库：https://github.com/JadeViewDocs/JadeView
+- 官方主页：https://jade.run
+- 问题反馈：[GitHub Issues](https://github.com/JadeViewDocs/JadeView/issues)
 
-## 📝 更新日志
-详细变更见 [Releases](https://github.com/JadeViewDocs/JadeView/releases)
-
----
-**JadeView** —— 让 Windows WebView 桌面开发更简单！
-
-要不要我帮你把这个README适配成仓库直传版本，补充徽章和目录跳转链接？
+## 🤝 贡献指南
+欢迎提交 PR、反馈 BUG 或提出功能建议，共同完善框架生态。

@@ -21,6 +21,7 @@
 ## 🖥️ 适配平台
 - Windows x86 32位
 - Windows x64 64位
+- Windows ARM64 (ARM 架构)
 
 ## 🛠️ 技术架构
 - 底层内核：Rust、Microsoft WebView2、标准 C FFI

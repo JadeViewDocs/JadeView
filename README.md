@@ -37,45 +37,97 @@
 
 ### 2. 官方标准极简示例（100% 匹配文档）
 ```c
-#include "jadeview.h"
 #include <stdio.h>
+#include <string.h>
+#include "jadeview.h"
 
-// app-ready 事件回调函数：框架初始化完成，在此处创建窗口
-void on_app_ready(JvInstance inst, void* user_data) {
-    printf("JadeView 初始化完成，开始创建窗口\n");
-
-    // 1. 配置窗口参数
-    JvWindowConfig cfg = {0};
-    cfg.width = 900;
-    cfg.height = 600;
-    cfg.title = "JadeView 官方示例";
-
-    // 2. 创建窗口（必须在 app-ready 事件中执行）
-    JvWindow win = jv_create_window(inst, &cfg);
-
-    // 3. 加载网页（支持在线地址 / 本地文件）
-    jv_navigate(win, "https://jade.run");
+// app-ready 事件回调函数
+const char* app_ready_callback(uint32_t window_id, const char* event_data) {
+    // 判断是否成功
+    if (window_id == 1 && event_data && strcmp(event_data, "success") == 0) {
+        printf("JadeView 准备就绪，现在可以创建窗口了\n");
+        
+        // 创建窗口选项
+        WebViewWindowOptions options = {
+            .title = "我的第一个窗口",
+            .width = 800,
+            .height = 600,
+            .resizable = 1,
+            .frame_style = "normal",  // normal, no-titlebar, borderless, title-overlay
+            .transparent = 0,
+            .theme = "System",  // Light, Dark, System
+            .maximized = 0,
+            .maximizable = 1,
+            .minimizable = 1,
+            .x = -1,  // -1, -1 表示居中
+            .y = -1,
+            .min_width = 0,
+            .min_height = 0,
+            .max_width = 0,
+            .max_height = 0,
+            .fullscreen = 0,
+            .focus = 1,
+            .hide_window = 0,
+            .use_page_icon = 0,
+            .content_protection = 0,
+            .auto_save_state = 0
+        };
+        
+        // 创建 WebView 设置
+        WebViewSettings settings = {
+            .autoplay = 0,
+            .background_throttling = 0,
+            .disable_right_click = 0,
+            .ua = NULL,
+            .preload_js = NULL,
+            .allow_fullscreen = 0,
+            .postmessage_whitelist = NULL
+        };
+        
+        // 创建窗口
+        uint32_t new_window_id = create_webview_window(
+            "https://www.example.com",
+            0,
+            &options,
+            &settings
+        );
+        
+        if (new_window_id == 0) {
+            printf("窗口创建失败\n");
+        } else {
+            printf("窗口创建成功，窗口 ID：%u\n", new_window_id);
+        }
+    } else {
+        printf("JadeView 初始化失败：%s\n", event_data ? event_data : "未知错误");
+    }
+    
+    return NULL;
 }
 
-int main(void)
-{
-    // 1. 创建 JadeView 实例
-    JvInstance inst = jv_create_instance();
-    if (!inst) {
-        printf("实例创建失败\n");
-        return -1;
+int main() {
+    // 先注册 app-ready 事件
+    jade_on("app-ready", app_ready_callback);
+    
+    // 初始化
+    int result = JadeView_init(
+        1,
+        NULL,
+        NULL,
+        "我的应用",
+        "com.example.myapp",
+        0
+    );
+    
+    if (result == 0) {
+        printf("初始化失败\n");
+        return 1;
     }
-
-    // 2. 【核心】注册 app-ready 事件回调
-    // 窗口创建逻辑必须放在此事件触发后执行
-    jv_set_event_callback(inst, JV_EVENT_APP_READY, on_app_ready, NULL);
-
-    // 3. 启动消息循环（阻塞运行）
-    jv_run_loop(inst);
-
-    // 4. 程序退出，释放资源
-    jv_destroy_instance(inst);
-
+    
+    printf("初始化成功，等待 app-ready 事件...\n");
+    
+    // 运行消息循环（可选，在 DLL 嵌入场景下通常不需要
+    // run_message_loop();
+    
     return 0;
 }
 ```

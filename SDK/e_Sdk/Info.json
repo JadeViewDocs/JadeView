@@ -1,15 +1,20 @@
 {
   "title": "易语言平台模块",
   "name": "JadeView_EC",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "author": "哪有不湿鞋",
   "platform": ["Windows"],
   "chipArch": ["x86"],
-  "compatibleVersion": "2.0 ~ 2.1",
+  "compatibleVersion": "2.0 ~ 2.2",
   "sdkFilePath": "./SDK",
   "changelog": [
     {
-      "version": "2.1.1",
+      "version": "2.2.0",
+      "updateTime": "2026-06-05",
+      "content": "破坏性更新,请阅读最新示例与源文件"
+    },
+  {
+      "version": "2.1.0",
       "updateTime": "2026-05-23",
       "content": "修复 创建窗口时 路径 参数 编码问题，同时增加部分模块使用注释说明"
     }

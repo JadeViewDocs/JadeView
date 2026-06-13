@@ -1,13 +1,18 @@
 {
   "title": "易语言平台模块",
   "name": "JadeView_EC",
-  "version": "2.2.0",
+  "version": "2.2.2",
   "author": "哪有不湿鞋",
   "platform": ["Windows"],
   "chipArch": ["x86"],
   "compatibleVersion": "2.0 ~ 2.2",
   "sdkFilePath": "./SDK",
   "changelog": [
+    {
+      "version": "2.2.2",
+      "updateTime": "2026-06-13",
+      "content": "修复了智能转码与YAML读写问题"
+    },
     {
       "version": "2.2.0",
       "updateTime": "2026-06-05",

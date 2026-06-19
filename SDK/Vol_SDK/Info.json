@@ -9,6 +9,11 @@
   "sdkFilePath": "./SDK",
   "changelog": [
     {
+      "version": "2.2.3",
+      "updateTime": "2026-06-19",
+      "content": "调整 - 无边框窗口时，如果边框是可调整大小的，仍可以手动拉伸窗口大小。\n优化 - 自定义标题栏覆盖层的标题栏按钮图标显示\n > 更加符合原生图标全平台强制使用Win11风格图标\n修复使用set_window_frame_style修改边框部分样式时可能无法生效的问题\nset_window_frame_style API标记为不可靠API 因Windows自身的窗口Dwm管理机制导致在某些情况下无法生效。"
+    },
+    {
       "version": "2.2.2",
       "updateTime": "2026-06-13",
       "content": "修复YAML读写文本编码导致的无法正常操作的问题\n智能编码转换改为字节集输入输出,缓冲区默认自动计算长度"

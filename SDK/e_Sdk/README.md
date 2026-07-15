@@ -14,3 +14,7 @@
   - 设置完回调函数后，可按照自身业务需求进行订阅 如：**JadeView.通讯.订阅** ("setTitlebarOverlayStyle") 
   - **JadeView.App.消息循环 ()**
   - 在**JadeView.App.注册事件** (#事件_应用准备就绪, &JadeView准备就绪)中的回调函数【JadeView准备就绪】事件下面创建窗口即可
+  
+  **2.3.0版本**
+  
+  - 同步更新官方api,详细更新参考官方https://jade.run/releases?v=v2.3.0

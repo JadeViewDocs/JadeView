@@ -1,13 +1,18 @@
 {
   "title": "火山视窗平台模块",
   "name": "JadeView_VolModule",
-  "version": "2.2.6",
+  "version": "2.3.0",
   "author": "落雪有声",
   "platform": ["Windows"],
   "chipArch": ["x86", "x64"],
-  "compatibleVersion": "2.0 ~ 2.2",
+  "compatibleVersion": "2.0 ~ 2.3",
   "sdkFilePath": "./SDK",
   "changelog": [
+    {
+      "version": "2.3.0",
+      "updateTime": "2026-07-16",
+      "content": "优化注释,调整解构,崩溃问题修复"
+    },
     {
       "version": "2.2.6",
       "updateTime": "2026-07-05",

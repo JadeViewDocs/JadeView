@@ -1,13 +1,18 @@
 {
   "title": "易语言平台模块",
   "name": "JadeView_EC",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "author": "哪有不湿鞋",
   "platform": ["Windows"],
   "chipArch": ["x86"],
-  "compatibleVersion": "2.0 ~ 2.3",
+  "compatibleVersion": "2.0 ~ 2.4",
   "sdkFilePath": "./SDK",
   "changelog": [
+    {
+      "version": "2.4.0",
+      "updateTime": "2026-08-15",
+      "content": "同步更新v2.4.0版本,更新具体详情参考官网"
+    },
     {
       "version": "2.3.0",
       "updateTime": "2026-07-15",

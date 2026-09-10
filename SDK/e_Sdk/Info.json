@@ -9,6 +9,11 @@
   "sdkFilePath": "./SDK",
   "changelog": [
     {
+      "version": "2.4.2",
+      "updateTime": "2026-09-10",
+      "content": "同步更新v2.4.2版本,修复【编码转换】长文本转换返回空的问题"
+    },
+    {
       "version": "2.4.0",
       "updateTime": "2026-08-15",
       "content": "同步更新v2.4.0版本,更新具体详情参考官网"

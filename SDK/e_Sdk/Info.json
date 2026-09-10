@@ -1,7 +1,7 @@
 {
   "title": "易语言平台模块",
   "name": "JadeView_EC",
-  "version": "2.4.0",
+  "version": "2.4.2",
   "author": "哪有不湿鞋",
   "platform": ["Windows"],
   "chipArch": ["x86"],

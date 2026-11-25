@@ -1,1 +1,14 @@
 blank_issues_enabled: false
+contact_links:
+  - name: 🚀 前往 jade.run 创建 Issue / 提交反馈（推荐）
+    url: https://jade.run/issues?repo=jadeview
+    about: 结构化填写运行环境、动态库版本与复现步骤，支持自动预填提交
+  - name: 🐛 提交 Bug 反馈
+    url: https://jade.run/issues?repo=jadeview&type=bug
+    about: 运行崩溃、API / ABI 行为异常或渲染问题
+  - name: 📦 发行版本与下载兼容问题
+    url: https://jade.run/issues?repo=jadeview&type=release
+    about: DLL / SO 下载包、校验和或特定版本回归问题
+  - name: ✨ 功能建议与新能力需求
+    url: https://jade.run/issues?repo=jadeview&type=feature
+    about: 新增原生接口或使用场景建议
